@@ -1,15 +1,15 @@
-REPLACE INTO users (id, login, password)
-VALUES (1, 'vasya', 'password');
+REPLACE INTO users (id, login, password, status)
+VALUES (1, 'vasya', 'qwerty123', 'activ');
 
-REPLACE INTO users (id, login, password)
-VALUES (2, 'petya', 'password');
+REPLACE INTO users (id, login, password,status)
+VALUES (2, 'petya', 'password','incorect');
 
 REPLACE INTO cards (id, user_id, number, balance_in_kopecks)
 VALUES (1, 1, '5559000000000001', 1000000),
        (2, 1, '5559000000000002', 1000000);
 
-REPLACE INTO card_transactions (source, target, amount_in_kopecks)
-VALUES ('5559000000000001', '5559000000000002', 10000);
+REPLACE INTO card_transactions (source, target, amount_in_kopecks, created)
+VALUES ('5559000000000001', '5559000000000002', 10000, 5000);
 
 UPDATE cards
 SET balance_in_kopecks = balance_in_kopecks - 10000

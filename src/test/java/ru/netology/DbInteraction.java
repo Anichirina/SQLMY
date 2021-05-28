@@ -17,10 +17,16 @@ public class DbInteraction {
 
     try (
         val conn = DriverManager.getConnection(
-            "jdbc:mysql://localhost:3306/app", "app", "pass"
+            "jdbc:mysql://localhost:3306/app", "user", "pass"
         );
         val dataStmt = conn.prepareStatement(dataSQL);
     ) {
+      dataStmt.setString(1, faker.name().username());
+      dataStmt.setString(2, "password");
+      dataStmt.executeUpdate();
+      dataStmt.setString(1, faker.name().username());
+      dataStmt.setString(2, "password");
+      dataStmt.executeUpdate();
       dataStmt.setString(1, faker.name().username());
       dataStmt.setString(2, "password");
       dataStmt.executeUpdate();
@@ -37,7 +43,7 @@ public class DbInteraction {
 
     try (
         val conn = DriverManager.getConnection(
-            "jdbc:mysql://localhost:3306/app", "app", "pass"
+            "jdbc:mysql://localhost:3306/app", "user", "pass"
         );
         val countStmt = conn.createStatement();
         val cardsStmt = conn.prepareStatement(cardsSQL);

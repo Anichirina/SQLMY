@@ -6,6 +6,7 @@ services:
     ports:
       - '3306:3306'
     volumes:
+      -  /var/lib/mysql
       - ./init_bd:/docker-entrypoint-initdb.d
     environment:
       - MYSQL_RANDOM_ROOT_PASSWORD=yes
