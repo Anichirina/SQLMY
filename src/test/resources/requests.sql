@@ -32,6 +32,8 @@ SELECT balance_in_kopecks / 100 AS balance_in_rub FROM cards WHERE number = '555
 
 SELECT max(cards.balance_in_kopecks) FROM cards;
 
+SELECT min(cards.balance_in_kopecks) FROM cards;
+
 SELECT sum(balance_in_kopecks) FROM cards WHERE user_id = 1;
 
 SELECT count(*), user_id FROM cards GROUP BY user_id;
