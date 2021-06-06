@@ -1,8 +1,9 @@
 REPLACE INTO users (id, login, password, status)
-VALUES (1, 'vasya', 'qwerty123', 'activ');
+VALUES (1, 'vasya', 'qwerty123', 'active'),
+       (2, 'petya', 'password', 'incorect');
 
-REPLACE INTO users (id, login, password,status)
-VALUES (2, 'petya', 'password','incorect');
+REPLACE INTO users (id, login, password, status)
+VALUES (2, 'petya', 'password', 'incorect');
 
 REPLACE INTO cards (id, user_id, number, balance_in_kopecks)
 VALUES (1, 1, '5559000000000001', 1000000),
