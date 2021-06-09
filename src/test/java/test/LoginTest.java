@@ -11,6 +11,10 @@ import page.LoginPage;
 import static com.codeborne.selenide.Selenide.open;
 
 public class LoginTest {
+    @AfterAll
+    static void clear() {
+        SQLData.cleanCodes();
+    }
 
     @BeforeEach
     void setUp() {
@@ -18,7 +22,9 @@ public class LoginTest {
     }
 
     @AfterAll
-    static void tidyUp() { SQLData.cleanCodes(); }
+    static void tidyUp() {
+        SQLData.cleanCodes();
+    }
 
     @Test
     void shouldValidLogin() {
