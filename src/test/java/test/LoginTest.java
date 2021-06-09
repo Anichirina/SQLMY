@@ -8,9 +8,16 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import page.LoginPage;
 
+import static com.codeborne.selenide.Condition.exactText;
+import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
 public class LoginTest {
+    @AfterAll
+    static void clear() {
+        SQLData.cleanCodes();
+    }
 
     @BeforeEach
     void setUp() {
@@ -18,16 +25,21 @@ public class LoginTest {
     }
 
     @AfterAll
-    static void tidyUp() { SQLData.cleanCodes(); }
+    static void tidyUp() {
+        SQLData.cleanCodes();
+    }
 
     @Test
     void shouldValidLogin() {
         val loginPage = new LoginPage();
         val authInfo = DataHelper.getAuthInfo();
         val verificationPage = loginPage.validLogin(authInfo);
-        String verificationCode = SQLData.getVerificationCode(authInfo.getLogin());
-        verificationPage.validVerify(verificationCode);
+        val verificationCode = SQLData.getVerificationCode(authInfo);
+        val dashboardPage = verificationPage.validVerify(verificationCode);
+        $("[data-test-id='dashboard']").shouldBe(visible)
+                .shouldHave(exactText("Личный кабинет"));
     }
+
 
     @Test
     void shouldInvalidLogin() {

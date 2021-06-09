@@ -7,9 +7,9 @@ import org.junit.jupiter.api.Test;
 
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 public class DbInteraction {
+ 
   @BeforeEach
   void setUp() throws SQLException {
     val faker = new Faker();
@@ -27,12 +27,7 @@ public class DbInteraction {
       dataStmt.setString(1, faker.name().username());
       dataStmt.setString(2, "password");
       dataStmt.executeUpdate();
-      dataStmt.setString(1, faker.name().username());
-      dataStmt.setString(2, "password");
-      dataStmt.executeUpdate();
-      dataStmt.setString(1, faker.name().username());
-      dataStmt.setString(2, "password");
-      dataStmt.executeUpdate();
+
     }
   }
 

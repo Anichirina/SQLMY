@@ -3,7 +3,6 @@ package ru.netology;
 import com.github.javafaker.Faker;
 import lombok.val;
 import org.apache.commons.dbutils.QueryRunner;
-import org.apache.commons.dbutils.ResultSetHandler;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
@@ -12,7 +11,6 @@ import org.junit.jupiter.api.Test;
 import ru.netology.mode.User;
 
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class DbInteractionDbUtils {
@@ -24,7 +22,7 @@ public class DbInteractionDbUtils {
 
         try (
                 val conn = DriverManager.getConnection(
-                        "jdbc:mysql://localhost:3306/app", "app", "pass"
+                        "jdbc:mysql://localhost:3306/app", "user", "pass"
                 );
 
         ) {
