@@ -36,3 +36,4 @@ out/
 *.tar.gz
 *.rar
 /src/
+/src/test/java/ru/netology/mode/

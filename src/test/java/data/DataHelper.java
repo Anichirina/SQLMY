@@ -19,4 +19,10 @@ public class DataHelper {
     public static AuthInfo getInvalidPass() {
         return new AuthInfo("vasya", "123");
     }
+
+    @Value
+    public static class VerificationCode {
+        private String login;
+        private String code;
+    }
 }

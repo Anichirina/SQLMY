@@ -40,7 +40,7 @@ public class DbInteractionDbUtils {
 
         try (
                 val conn = DriverManager.getConnection(
-                        "jdbc:mysql://localhost:3306/app", "app", "pass"
+                        "jdbc:mysql://localhost:3306/app", "user", "pass"
                 );
         ) {
           val count = runner.query(conn, countSQL, new ScalarHandler<>());

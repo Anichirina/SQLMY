@@ -22,10 +22,10 @@ public class DbInteraction {
         val dataStmt = conn.prepareStatement(dataSQL);
     ) {
       dataStmt.setString(1, faker.name().username());
-      dataStmt.setString(2, "password");
+      dataStmt.setString(2, "pass");
       dataStmt.executeUpdate();
       dataStmt.setString(1, faker.name().username());
-      dataStmt.setString(2, "password");
+      dataStmt.setString(2, "pass");
       dataStmt.executeUpdate();
 
     }

@@ -37,4 +37,9 @@ public class LoginPage {
         loginField.shouldBe(readonly);
         loginButton.shouldBe(hidden);
     }
+
+    public void cleanLoginFields() {
+        loginField.doubleClick().sendKeys(Keys.BACK_SPACE);
+        passwordField.doubleClick().sendKeys(Keys.BACK_SPACE);
+    }
 }

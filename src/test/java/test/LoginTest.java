@@ -8,12 +8,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import page.LoginPage;
 
-import static com.codeborne.selenide.Condition.exactText;
-import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
 public class LoginTest {
+    SQLData mySql = new SQLData();
+
     @AfterAll
     static void clear() {
         SQLData.cleanCodes();
@@ -24,18 +25,14 @@ public class LoginTest {
         open("http://localhost:9999");
     }
 
-    @AfterAll
-    static void tidyUp() {
-        SQLData.cleanCodes();
-    }
 
     @Test
     void shouldValidLogin() {
         val loginPage = new LoginPage();
         val authInfo = DataHelper.getAuthInfo();
         val verificationPage = loginPage.validLogin(authInfo);
-        val verificationCode = SQLData.getVerificationCode(authInfo);
-        val dashboardPage = verificationPage.validVerify(verificationCode);
+        val verificationCode = SQLData.getVerificationCode(authInfo.getLogin());
+        verificationPage.validVerify(verificationCode);
         $("[data-test-id='dashboard']").shouldBe(visible)
                 .shouldHave(exactText("Личный кабинет"));
     }
@@ -53,7 +50,10 @@ public class LoginTest {
         val loginPage = new LoginPage();
         val authInfo = DataHelper.getInvalidPass();
         loginPage.login(authInfo);
+        loginPage.cleanLoginFields();
         loginPage.login(authInfo);
-        loginPage.isBlocked(authInfo);
+        loginPage.cleanLoginFields();
+        loginPage.login(authInfo);
+        $("[data-test-id='action-login']").shouldBe(visible);
     }
 }
