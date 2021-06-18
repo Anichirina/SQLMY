@@ -13,6 +13,7 @@ public class VerificationPage {
         codeField.shouldBe(Condition.visible);
     }
 
+
     public DashboardPage validVerify(String verificationCode) {
         codeField.setValue(verificationCode);
         verifyButton.click();

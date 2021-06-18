@@ -74,3 +74,6 @@ WHERE login;
 
 DELETE
 FROM cards;
+
+DELETE
+from app.users

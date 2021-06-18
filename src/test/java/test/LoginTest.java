@@ -6,9 +6,7 @@ import lombok.val;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import page.DashboardPage;
 import page.LoginPage;
-import page.VerificationPage;
 
 import static com.codeborne.selenide.Selenide.open;
 
@@ -28,17 +26,14 @@ public class LoginTest {
 
     @Test
     void shouldValidLogin() {
-
         val loginPage = new LoginPage();
-        val dashboardPage = new DashboardPage();
         val authInfo = DataHelper.getAuthInfo();
-        loginPage.login(authInfo);
+        val verificationPage = loginPage.validLogin(authInfo);
         val verificationCode = SQLData.getVerificationCode(authInfo.getLogin());
-        VerificationPage verificationPage;
-        verificationPage.validVerify(verificationCode);
+        val dashboardPage = verificationPage.validVerify(verificationCode);
         dashboardPage.shouldVisilePersonAccounte();
-    }
 
+    }
 
     @Test
     void shouldInvalidLogin() {
@@ -60,13 +55,4 @@ public class LoginTest {
         ;
     }
 
-    @Test
-    void shouldV() {
-        val loginPage = new LoginPage();
-        val authInfo = DataHelper.getInvalidPass();
-        loginPage.login(authInfo);
-
-        loginPage.shouldButtonContinue();
-        ;
-    }
 }

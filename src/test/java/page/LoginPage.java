@@ -15,6 +15,7 @@ public class LoginPage {
     private SelenideElement loginButton = $("[data-test-id=action-login]");
     private SelenideElement notification = $(".notification__content");
 
+
     public void login(DataHelper.AuthInfo info) {
         loginField.sendKeys(Keys.chord(Keys.SHIFT, Keys.UP), Keys.DELETE);
         loginField.setValue(info.getLogin());
@@ -23,10 +24,11 @@ public class LoginPage {
         loginButton.click();
     }
 
-    public void validLogin(DataHelper.AuthInfo info) {
-        login(info);
-    }
 
+    public VerificationPage validLogin(DataHelper.AuthInfo info) {
+        login(info);
+        return new VerificationPage();
+    }
 
     public void invalidLogin(DataHelper.AuthInfo info) {
         login(info);
