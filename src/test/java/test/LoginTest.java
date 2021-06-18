@@ -1,5 +1,7 @@
 package test;
 
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Selectors;
 import data.DataHelper;
 import data.SQLData;
 import lombok.val;
@@ -46,7 +48,7 @@ public class LoginTest {
     }
 
     @Test
-    void shouldBeBlocked() {
+    void shouldVisibleAndClickTheButtonContinue() {
         val loginPage = new LoginPage();
         val authInfo = DataHelper.getInvalidPass();
         loginPage.login(authInfo);
@@ -54,6 +56,7 @@ public class LoginTest {
         loginPage.login(authInfo);
         loginPage.cleanLoginFields();
         loginPage.login(authInfo);
-        $("[data-test-id='action-login']").shouldBe(visible);
+        $(Selectors.byText("Продолжить")).shouldBe(Condition.visible);
+        ;
     }
 }
