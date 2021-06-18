@@ -1,6 +1,7 @@
 package page;
 
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Selectors;
 import com.codeborne.selenide.SelenideElement;
 import data.DataHelper;
 import org.openqa.selenium.Keys;
@@ -22,21 +23,20 @@ public class LoginPage {
         loginButton.click();
     }
 
-    public VerificationPage validLogin(DataHelper.AuthInfo info) {
+    public void validLogin(DataHelper.AuthInfo info) {
         login(info);
-        return new VerificationPage();
     }
+
 
     public void invalidLogin(DataHelper.AuthInfo info) {
         login(info);
         notification.shouldBe(Condition.visible).shouldHave(text("Неверно указан логин или пароль"));
     }
 
-    public void isBlocked(DataHelper.AuthInfo info) {
-        login(info);
-        loginField.shouldBe(readonly);
-        loginButton.shouldBe(hidden);
+    public void shouldButtonContinue() {
+        $(Selectors.byText("Продолжить")).shouldBe(Condition.visible);
     }
+
 
     public void cleanLoginFields() {
         loginField.doubleClick().sendKeys(Keys.BACK_SPACE);

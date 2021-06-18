@@ -22,7 +22,9 @@ public class SQLData {
 
     @SneakyThrows
     public static String getVerificationCode(String user) {
-        val code = "SELECT code FROM auth_codes INNER JOIN users ON auth_codes.user_id = users.id WHERE login \"" + user + "\" ORDER BY created DESC";
+        val code = "SELECT code FROM auth_codes INNER JOIN users ON auth_codes.user_id = users.id WHERE login = \""
+                + user + "\" ORDER BY created DESC";
+
         return runner.query(conn, code, new ScalarHandler<>());
     }
 

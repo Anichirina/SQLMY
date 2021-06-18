@@ -1,21 +1,19 @@
 package test;
 
-import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Selectors;
 import data.DataHelper;
 import data.SQLData;
 import lombok.val;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import page.DashboardPage;
 import page.LoginPage;
+import page.VerificationPage;
 
-import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
 public class LoginTest {
-    SQLData mySql = new SQLData();
+
 
     @AfterAll
     static void clear() {
@@ -30,13 +28,15 @@ public class LoginTest {
 
     @Test
     void shouldValidLogin() {
+
         val loginPage = new LoginPage();
+        val dashboardPage = new DashboardPage();
         val authInfo = DataHelper.getAuthInfo();
-        val verificationPage = loginPage.validLogin(authInfo);
+        loginPage.login(authInfo);
         val verificationCode = SQLData.getVerificationCode(authInfo.getLogin());
+        VerificationPage verificationPage;
         verificationPage.validVerify(verificationCode);
-        $("[data-test-id='dashboard']").shouldBe(visible)
-                .shouldHave(exactText("Личный кабинет"));
+        dashboardPage.shouldVisilePersonAccounte();
     }
 
 
@@ -56,7 +56,17 @@ public class LoginTest {
         loginPage.login(authInfo);
         loginPage.cleanLoginFields();
         loginPage.login(authInfo);
-        $(Selectors.byText("Продолжить")).shouldBe(Condition.visible);
+        loginPage.shouldButtonContinue();
+        ;
+    }
+
+    @Test
+    void shouldV() {
+        val loginPage = new LoginPage();
+        val authInfo = DataHelper.getInvalidPass();
+        loginPage.login(authInfo);
+
+        loginPage.shouldButtonContinue();
         ;
     }
 }
